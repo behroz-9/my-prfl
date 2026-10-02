@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Behroz | Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Dancing Script & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --glow-color: rgba(255, 117, 160, 0.6);
+            --glow-intense: rgba(255, 42, 117, 0.85);
+            --card-bg: rgba(24, 8, 14, 0.65);
+            --card-border: rgba(255, 117, 160, 0.25);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0b0205;
+            color: #f3e8ee;
+            overflow-x: hidden;
+        }
+
+        .font-cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Glowing Text Effects */
+        .glow-text-title {
+            text-shadow: 
+                0 0 10px rgba(255, 117, 160, 0.8),
+                0 0 20px rgba(255, 42, 117, 0.6),
+                0 0 35px rgba(255, 42, 117, 0.4);
+        }
+
+        .glow-text-subtle {
+            text-shadow: 0 0 8px rgba(255, 117, 160, 0.5);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 117, 160, 0.05);
+            transition: all 0.35s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 117, 160, 0.55);
+            box-shadow: 
+                0 10px 35px 0 rgba(0, 0, 0, 0.6),
+                0 0 20px rgba(255, 117, 160, 0.3),
+                inset 0 0 20px rgba(255, 117, 160, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .glow-border-box {
+            border: 1px solid rgba(255, 117, 160, 0.4);
+            box-shadow: 0 0 15px rgba(255, 117, 160, 0.25), inset 0 0 15px rgba(255, 117, 160, 0.1);
+        }
+
+        /* Profile Avatar Glow */
+        .avatar-glow {
+            box-shadow: 
+                0 0 0 3px rgba(255, 117, 160, 0.3),
+                0 0 20px rgba(255, 42, 117, 0.6),
+                0 0 40px rgba(255, 117, 160, 0.4);
+            animation: pulse-avatar 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse-avatar {
+            0% {
+                box-shadow: 0 0 0 3px rgba(255, 117, 160, 0.4), 0 0 20px rgba(255, 42, 117, 0.6), 0 0 35px rgba(255, 117, 160, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 0 5px rgba(255, 117, 160, 0.7), 0 0 30px rgba(255, 42, 117, 0.9), 0 0 50px rgba(255, 117, 160, 0.6);
+            }
+        }
+
+        /* Timeline Connector */
+        .timeline-dot {
+            box-shadow: 0 0 10px #ff75a0, 0 0 20px #ff2a75;
+        }
+
+        /* Typewriter Cursor */
+        .cursor-blink {
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Interactive Pill Badges */
+        .tag-badge {
+            background: rgba(255, 117, 160, 0.12);
+            border: 1px solid rgba(255, 117, 160, 0.4);
+            color: #ffb8d0;
+            transition: all 0.3s ease;
+        }
+        .tag-badge:hover {
+            background: rgba(255, 117, 160, 0.3);
+            border-color: rgba(255, 117, 160, 0.8);
+            box-shadow: 0 0 15px rgba(255, 117, 160, 0.5);
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .tag-badge-filled {
+            background: linear-gradient(135deg, rgba(255, 117, 160, 0.8), rgba(255, 42, 117, 0.8));
+            box-shadow: 0 0 15px rgba(255, 42, 117, 0.5);
+            color: #ffffff;
+        }
+
+        /* Background Canvas */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0205;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3a1020;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff75a0;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between items-center py-10 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-[#1c0812] via-[#0f0409] to-[#080104]">
+
+    <canvas id="bgCanvas"></canvas>
+
+    <main class="w-full max-w-4xl mx-auto z-10 flex flex-col items-center space-y-8">
+
+        <header class="flex flex-col items-center text-center space-y-4 pt-4">
+            <!-- Profile Avatar with glowing effect -->
+            <div class="relative group cursor-pointer" id="avatarContainer">
+                <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden avatar-glow border-2 border-[#ff75a0] bg-zinc-900 flex items-center justify-center">
+                    <img id="avatarImage" 
+                         src="1.png" 
+                         alt="Muhammad Behroz" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                         onerror="this.src='https://placehold.co/400x400/2a0815/ff75a0?text=Behroz'"
+                    />
+                </div>
+                <!-- Photo update button -->
+                <button onclick="document.getElementById('photoInput').click()" 
+                        class="absolute bottom-0 right-0 bg-[#ff2a75] text-white p-2 rounded-full text-xs shadow-lg hover:bg-[#ff75a0] transition-colors duration-200"
+                        title="Change Photo">
+                    <i class="fa-solid fa-camera"></i>
+                </button>
+                <input type="file" id="photoInput" class="hidden" accept="image/*">
+            </div>
+
+            <!-- Glowing cursive title -->
+            <h1 class="font-cursive text-4xl sm:text-5xl md:text-6xl text-[#ffdbe6] glow-text-title font-bold tracking-wide mt-2">
+                Muhammad Behroz
+            </h1>
+
+            <!-- Dynamic Typewriter Subtitle -->
+            <div class="h-6 flex items-center justify-center text-pink-200 text-sm sm:text-base font-light tracking-wider glow-text-subtle">
+                <span id="typewriterText"></span><span class="cursor-blink text-[#ff75a0] ml-0.5">|</span>
+            </div>
+
+            <!-- Age Badge -->
+            <div class="mt-1 inline-flex items-center justify-center px-5 py-1.5 rounded-full text-xs font-medium text-pink-200 border border-pink-500/40 bg-pink-950/30 backdrop-blur-md shadow-[0_0_12px_rgba(255,117,160,0.25)]">
+                Age: <span id="headerAgeBadge" class="ml-1 text-white font-semibold">71</span>
+            </div>
+        </header>
+
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- CARD 1: About Me -->
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden">
+                <div class="flex items-center space-x-2 mb-4">
+                    <h2 class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle font-semibold">
+                        About me
+                    </h2>
+                </div>
+                
+                <div class="space-y-3 text-sm text-pink-100/90">
+                    <div class="grid grid-cols-3 border-b border-pink-500/10 pb-2">
+                        <span class="font-medium text-pink-300/70">Name</span>
+                        <span class="col-span-2 font-light">Muhammad Behroz</span>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-pink-500/10 pb-2">
+                        <span class="font-medium text-pink-300/70">Age</span>
+                        <span class="col-span-2 font-light">71 years</span>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-pink-500/10 pb-2">
+                        <span class="font-medium text-pink-300/70">Skill</span>
+                        <span class="col-span-2 font-light">Skating</span>
+                    </div>
+                    <div class="grid grid-cols-3">
+                        <span class="font-medium text-pink-300/70">Hobbies</span>
+                        <span class="col-span-2 font-light">Cycling and eating</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 2: Education -->
+            <div class="glass-card rounded-2xl p-6 relative">
+                <h2 class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle font-semibold mb-4">
+                    Education
+                </h2>
+
+                <div class="relative pl-6 space-y-6 border-l border-pink-500/30 ml-2 my-2">
+                    <!-- Education 1 -->
+                    <div class="relative group">
+                        <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#ff75a0] timeline-dot border-2 border-[#1c0812]"></div>
+                        <h3 class="text-sm sm:text-base font-semibold text-white group-hover:text-[#ff8dae] transition-colors">
+                            Capstone International School Dhaka
+                        </h3>
+                        <p class="text-xs text-pink-200/70 mt-0.5">O level passed</p>
+                    </div>
+
+                    <!-- Education 2 -->
+                    <div class="relative group">
+                        <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#ff2a75] timeline-dot border-2 border-[#1c0812]"></div>
+                        <h3 class="text-sm sm:text-base font-semibold text-white group-hover:text-[#ff8dae] transition-colors">
+                            Manarat Dhaka International School and College
+                        </h3>
+                        <p class="text-xs text-pink-200/70 mt-0.5">Currently studying</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- CARD 3: Skill -->
+            <div class="glass-card rounded-2xl p-6">
+                <h2 class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle font-semibold mb-4">
+                    Skill
+                </h2>
+                <div class="flex flex-wrap gap-3">
+                    <span class="tag-badge tag-badge-filled px-5 py-2 rounded-full text-xs font-medium cursor-default">
+                        Skating
+                    </span>
+                </div>
+            </div>
+
+            <!-- CARD 4: Hobbies -->
+            <div class="glass-card rounded-2xl p-6">
+                <h2 class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle font-semibold mb-4">
+                    Hobbies
+                </h2>
+                <div class="flex flex-wrap gap-3">
+                    <span class="tag-badge px-5 py-2 rounded-full text-xs font-medium cursor-pointer">
+                        Cycling
+                    </span>
+                    <span class="tag-badge px-5 py-2 rounded-full text-xs font-medium cursor-pointer">
+                        Eating
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="w-full glass-card rounded-2xl p-6 sm:p-8 glow-border-box relative overflow-hidden">
+            <h2 class="font-cursive text-3xl sm:text-4xl text-[#ff8dae] glow-text-title font-semibold mb-6">
+                Age counter
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Live Age counter -->
+                <div class="border border-pink-500/20 bg-pink-950/20 rounded-xl p-5 text-center flex flex-col justify-center space-y-2 border-dashed">
+                    <span class="text-xs sm:text-sm text-pink-300/80 font-medium tracking-wide">
+                        Age right now
+                    </span>
+                    <div id="ageRealtime" class="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-wider glow-text-subtle py-1">
+                        71 years, 274 days, 00:00:00
+                    </div>
+                </div>
+
+                <!-- Next Birthday countdown -->
+                <div class="border border-pink-500/20 bg-pink-950/20 rounded-xl p-5 text-center flex flex-col justify-center space-y-2 border-dashed">
+                    <span class="text-xs sm:text-sm text-pink-300/80 font-medium tracking-wide">
+                        Next birthday in
+                    </span>
+                    <div id="nextBirthday" class="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-wider glow-text-subtle py-1">
+                        90 days, 11:09:20
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-4xl mx-auto z-10 text-center py-8 mt-6 flex flex-col items-center space-y-3">
+        <p class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle">
+            Thanks for visiting my page
+        </p>
+        <div class="text-[#ff75a0] text-xl animate-bounce glow-text-title mt-1">
+            🌸
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Typewriter Animation Effect ---
+        const words = ["Skating", "Cycling", "Eating", "Student"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById("typewriterText");
+
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typewriterEl.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterEl.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 60 : 120;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 1800;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 400;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // --- 2. Live Age & Next Birthday Counter Logic ---
+        // Birthdate anchored for 71 years old
+        const birthDate = new Date(1955, 0, 1, 0, 0, 0); 
+
+        function updateCounters() {
+            const now = new Date();
+            
+            const diffMs = now - birthDate;
+            const diffDaysTotal = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            
+            const years = Math.floor(diffDaysTotal / 365.25);
+            const daysInCurrentYear = Math.floor(diffDaysTotal % 365.25);
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById('ageRealtime').textContent = 
+                `${years} years, ${daysInCurrentYear} days, ${hours}:${minutes}:${seconds}`;
+
+            // Calculate Next Birthday
+            let nextBdayYear = now.getFullYear();
+            let nextBday = new Date(nextBdayYear, birthDate.getMonth(), birthDate.getDate());
+            
+            if (now > nextBday) {
+                nextBdayYear++;
+                nextBday = new Date(nextBdayYear, birthDate.getMonth(), birthDate.getDate());
+            }
+
+            const bdayDiffMs = nextBday - now;
+            const bdayDays = Math.floor(bdayDiffMs / (1000 * 60 * 60 * 24));
+            const bdayHours = String(Math.floor((bdayDiffMs / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+            const bdayMinutes = String(Math.floor((bdayDiffMs / (1000 * 60)) % 60)).padStart(2, '0');
+            const bdaySeconds = String(Math.floor((bdayDiffMs / 1000) % 60)).padStart(2, '0');
+
+            document.getElementById('nextBirthday').textContent = 
+                `${bdayDays} days, ${bdayHours}:${bdayMinutes}:${bdaySeconds}`;
+        }
+
+        // --- 3. Interactive Profile Photo Input ---
+        const photoInput = document.getElementById('photoInput');
+        const avatarImage = document.getElementById('avatarImage');
+
+        photoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    avatarImage.src = event.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // --- 4. Interactive Floating Sakura Petals Canvas ---
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const numParticles = 45;
+        const particles = [];
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * -height;
+                this.size = Math.random() * 8 + 6;
+                this.speedY = Math.random() * 1.2 + 0.6;
+                this.speedX = Math.random() * 0.8 - 0.4;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 1.5;
+                this.opacity = Math.random() * 0.7 + 0.3;
+                this.isBokeh = Math.random() > 0.6;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.01) + this.speedX;
+                this.rotation += this.rotationSpeed;
+
+                if (this.y > height + 20) {
+                    this.reset();
+                    this.y = -10;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+
+                if (this.isBokeh) {
+                    ctx.beginPath();
+                    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size * 2);
+                    gradient.addColorStop(0, `rgba(255, 117, 160, ${this.opacity})`);
+                    gradient.addColorStop(1, 'rgba(255, 42, 117, 0)');
+                    ctx.fillStyle = gradient;
+                    ctx.arc(0, 0, this.size * 2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.rotate((this.rotation * Math.PI) / 180);
+                    ctx.beginPath();
+                    ctx.fillStyle = `rgba(255, 150, 185, ${this.opacity})`;
+                    ctx.shadowColor = 'rgba(255, 42, 117, 0.8)';
+                    ctx.shadowBlur = 8;
+                    
+                    ctx.moveTo(0, -this.size);
+                    ctx.bezierCurveTo(this.size / 2, -this.size / 2, this.size / 2, this.size / 2, 0, this.size);
+                    ctx.bezierCurveTo(-this.size / 2, this.size / 2, -this.size / 2, -this.size / 2, 0, -this.size);
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < numParticles; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+
+        window.onload = function() {
+            typeEffect();
+            updateCounters();
+            setInterval(updateCounters, 1000);
+            animateCanvas();
+        };
+    </script>
+</body>
+</html>
