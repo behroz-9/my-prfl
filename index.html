@@ -3,92 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Behroz | Portfolio</title>
+    <title>Muhammad Behroz | The Dark Knight Portfolio</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Dancing Script & Poppins -->
+    <!-- Google Fonts: Oswald (Gotham Tech) & Rajdhani (Futuristic Hero) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --glow-color: rgba(255, 117, 160, 0.6);
-            --glow-intense: rgba(255, 42, 117, 0.85);
-            --card-bg: rgba(24, 8, 14, 0.65);
-            --card-border: rgba(255, 117, 160, 0.25);
+            --bat-red: #ff1a2d;
+            --bat-crimson: #d60b1e;
+            --bat-glow: rgba(255, 26, 45, 0.55);
+            --bat-glow-intense: rgba(255, 26, 45, 0.9);
+            --gotham-card: rgba(18, 10, 12, 0.82);
+            --gotham-border: rgba(255, 26, 45, 0.35);
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0b0205;
-            color: #f3e8ee;
+            font-family: 'Rajdhani', sans-serif;
+            background-color: #060305;
+            color: #e2e8f0;
             overflow-x: hidden;
         }
 
-        .font-cursive {
-            font-family: 'Dancing Script', cursive;
+        .font-batman {
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
-        /* Glowing Text Effects */
-        .glow-text-title {
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Batman Red Glowing Text Effects */
+        .glow-text-bat {
+            color: var(--bat-red);
             text-shadow: 
-                0 0 10px rgba(255, 117, 160, 0.8),
-                0 0 20px rgba(255, 42, 117, 0.6),
-                0 0 35px rgba(255, 42, 117, 0.4);
+                0 0 10px rgba(255, 26, 45, 0.95),
+                0 0 22px rgba(214, 11, 30, 0.75),
+                0 0 35px rgba(214, 11, 30, 0.4);
         }
 
         .glow-text-subtle {
-            text-shadow: 0 0 8px rgba(255, 117, 160, 0.5);
+            text-shadow: 0 0 8px rgba(255, 26, 45, 0.5);
         }
 
-        /* Glassmorphism Cards */
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 117, 160, 0.05);
-            transition: all 0.35s ease;
+        /* Gotham Crimson Dark Glassmorphism Cards */
+        .gotham-card {
+            background: var(--gotham-card);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--gotham-border);
+            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(255, 26, 45, 0.04);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .glass-card:hover {
-            border-color: rgba(255, 117, 160, 0.55);
+        .gotham-card:hover {
+            border-color: rgba(255, 26, 45, 0.75);
             box-shadow: 
-                0 10px 35px 0 rgba(0, 0, 0, 0.6),
-                0 0 20px rgba(255, 117, 160, 0.3),
-                inset 0 0 20px rgba(255, 117, 160, 0.1);
-            transform: translateY(-3px);
+                0 12px 40px 0 rgba(0, 0, 0, 0.95),
+                0 0 28px rgba(255, 26, 45, 0.35),
+                inset 0 0 25px rgba(255, 26, 45, 0.1);
+            transform: translateY(-4px);
         }
 
         .glow-border-box {
-            border: 1px solid rgba(255, 117, 160, 0.4);
-            box-shadow: 0 0 15px rgba(255, 117, 160, 0.25), inset 0 0 15px rgba(255, 117, 160, 0.1);
+            border: 1px solid rgba(255, 26, 45, 0.5);
+            box-shadow: 0 0 22px rgba(255, 26, 45, 0.25), inset 0 0 15px rgba(255, 26, 45, 0.1);
         }
 
-        /* Profile Avatar Glow */
-        .avatar-glow {
+        /* Red Bat-Signal Avatar Frame Glow */
+        .bat-avatar-glow {
             box-shadow: 
-                0 0 0 3px rgba(255, 117, 160, 0.3),
-                0 0 20px rgba(255, 42, 117, 0.6),
-                0 0 40px rgba(255, 117, 160, 0.4);
-            animation: pulse-avatar 3s infinite alternate ease-in-out;
+                0 0 0 3px rgba(255, 26, 45, 0.45),
+                0 0 25px rgba(255, 26, 45, 0.75),
+                0 0 55px rgba(214, 11, 30, 0.5);
+            animation: pulse-batsignal 3.5s infinite alternate ease-in-out;
         }
 
-        @keyframes pulse-avatar {
+        @keyframes pulse-batsignal {
             0% {
-                box-shadow: 0 0 0 3px rgba(255, 117, 160, 0.4), 0 0 20px rgba(255, 42, 117, 0.6), 0 0 35px rgba(255, 117, 160, 0.3);
+                box-shadow: 0 0 0 3px rgba(255, 26, 45, 0.45), 0 0 20px rgba(255, 26, 45, 0.65), 0 0 40px rgba(214, 11, 30, 0.35);
             }
             100% {
-                box-shadow: 0 0 0 5px rgba(255, 117, 160, 0.7), 0 0 30px rgba(255, 42, 117, 0.9), 0 0 50px rgba(255, 117, 160, 0.6);
+                box-shadow: 0 0 0 5px rgba(255, 26, 45, 0.85), 0 0 38px rgba(255, 26, 45, 0.95), 0 0 70px rgba(214, 11, 30, 0.65);
             }
         }
 
-        /* Timeline Connector */
-        .timeline-dot {
-            box-shadow: 0 0 10px #ff75a0, 0 0 20px #ff2a75;
+        /* Crimson Bat Timeline Dot */
+        .bat-dot {
+            box-shadow: 0 0 12px #ff1a2d, 0 0 24px #d60b1e;
         }
 
         /* Typewriter Cursor */
@@ -100,25 +109,26 @@
             50% { opacity: 0; }
         }
 
-        /* Interactive Pill Badges */
+        /* Gotham Red Tag Badges */
         .tag-badge {
-            background: rgba(255, 117, 160, 0.12);
-            border: 1px solid rgba(255, 117, 160, 0.4);
-            color: #ffb8d0;
+            background: rgba(255, 26, 45, 0.08);
+            border: 1px solid rgba(255, 26, 45, 0.38);
+            color: #ff1a2d;
             transition: all 0.3s ease;
         }
         .tag-badge:hover {
-            background: rgba(255, 117, 160, 0.3);
-            border-color: rgba(255, 117, 160, 0.8);
-            box-shadow: 0 0 15px rgba(255, 117, 160, 0.5);
+            background: rgba(255, 26, 45, 0.25);
+            border-color: rgba(255, 26, 45, 0.9);
+            box-shadow: 0 0 20px rgba(255, 26, 45, 0.55);
             color: #ffffff;
             transform: scale(1.05);
         }
 
         .tag-badge-filled {
-            background: linear-gradient(135deg, rgba(255, 117, 160, 0.8), rgba(255, 42, 117, 0.8));
-            box-shadow: 0 0 15px rgba(255, 42, 117, 0.5);
+            background: linear-gradient(135deg, rgba(255, 26, 45, 0.9), rgba(214, 11, 30, 0.9));
+            box-shadow: 0 0 20px rgba(255, 26, 45, 0.6);
             color: #ffffff;
+            font-weight: 700;
         }
 
         /* Background Canvas */
@@ -132,30 +142,42 @@
             z-index: 0;
         }
 
+        /* Red Bat-Signal Ambient Fog */
+        .batsignal-bg {
+            background: radial-gradient(circle at 50% 18%, rgba(255, 26, 45, 0.12) 0%, rgba(6, 3, 5, 0) 65%);
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0b0205;
+            background: #060305;
         }
         ::-webkit-scrollbar-thumb {
-            background: #3a1020;
+            background: #230c12;
             border-radius: 4px;
+            border: 1px solid rgba(255, 26, 45, 0.3);
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #ff75a0;
+            background: #ff1a2d;
         }
     </style>
 </head>
-<body class="min-h-screen relative flex flex-col justify-between items-center py-10 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-[#1c0812] via-[#0f0409] to-[#080104]">
+<body class="min-h-screen relative flex flex-col justify-between items-center py-10 px-4 sm:px-6 md:px-8 bg-gradient-to-b from-[#120509] via-[#060305] to-[#020103] batsignal-bg">
 
     <canvas id="bgCanvas"></canvas>
 
     <main class="w-full max-w-4xl mx-auto z-10 flex flex-col items-center space-y-8">
 
-        <header class="flex flex-col items-center text-center space-y-4 pt-4">
-            <!-- Profile Avatar with glowing effect -->
+        <!-- HEADER SECTION -->
+        <header class="flex flex-col items-center text-center space-y-4 pt-2">
+            <!-- Red Bat Silhouette Header Icon -->
+            <div class="text-[#ff1a2d] text-3xl sm:text-4xl glow-text-bat animate-pulse">
+                <i class="fa-solid fa-mask"></i>
+            </div>
+
+            <!-- Profile Avatar with glowing Red Bat-Signal frame -->
             <div class="relative group cursor-pointer" id="avatarContainer">
                 <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden avatar-glow border-2 border-[#ff75a0] bg-zinc-900 flex items-center justify-center">
                     <img id="avatarImage" 
@@ -167,82 +189,99 @@
                 </div>
                 <!-- Photo update button -->
                 <button onclick="document.getElementById('photoInput').click()" 
-                        class="absolute bottom-0 right-0 bg-[#ff2a75] text-white p-2 rounded-full text-xs shadow-lg hover:bg-[#ff75a0] transition-colors duration-200"
+                        class="absolute bottom-0 right-0 bg-[#ff1a2d] text-white p-2 rounded-full text-xs font-bold shadow-lg hover:bg-red-600 transition-colors duration-200"
                         title="Change Photo">
                     <i class="fa-solid fa-camera"></i>
                 </button>
                 <input type="file" id="photoInput" class="hidden" accept="image/*">
             </div>
 
-            <!-- Glowing cursive title -->
-            <h1 class="font-cursive text-4xl sm:text-5xl md:text-6xl text-[#ffdbe6] glow-text-title font-bold tracking-wide mt-2">
+            <!-- Glowing Crimson Batman Title -->
+            <h1 class="font-batman text-4xl sm:text-5xl md:text-6xl text-white tracking-widest glow-text-bat font-bold mt-2">
                 Muhammad Behroz
             </h1>
 
             <!-- Dynamic Typewriter Subtitle -->
-            <div class="h-6 flex items-center justify-center text-pink-200 text-sm sm:text-base font-light tracking-wider glow-text-subtle">
-                <span id="typewriterText"></span><span class="cursor-blink text-[#ff75a0] ml-0.5">|</span>
+            <div class="h-6 flex items-center justify-center text-red-100/90 text-base sm:text-lg font-medium tracking-wider glow-text-subtle">
+                <span class="text-[#ff1a2d] mr-2"><i class="fa-solid fa-bolt"></i></span>
+                <span id="typewriterText"></span><span class="cursor-blink text-[#ff1a2d] ml-0.5">|</span>
             </div>
 
             <!-- Age Badge -->
-            <div class="mt-1 inline-flex items-center justify-center px-5 py-1.5 rounded-full text-xs font-medium text-pink-200 border border-pink-500/40 bg-pink-950/30 backdrop-blur-md shadow-[0_0_12px_rgba(255,117,160,0.25)]">
-                Age: <span id="headerAgeBadge" class="ml-1 text-white font-semibold">71</span>
+            <div class="mt-1 inline-flex items-center justify-center px-6 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase text-red-400 border border-red-500/50 bg-black/70 backdrop-blur-md shadow-[0_0_18px_rgba(255,26,45,0.35)]">
+                <i class="fa-solid fa-shield-halved mr-2 text-[#ff1a2d]"></i> Gotham Veteran • Age: <span id="headerAgeBadge" class="ml-1 text-white">71</span>
             </div>
         </header>
 
         <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <!-- CARD 1: About Me -->
-            <div class="glass-card rounded-2xl p-6 relative overflow-hidden">
-                <div class="flex items-center space-x-2 mb-4">
-                    <h2 class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle font-semibold">
+            <div class="gotham-card rounded-2xl p-6 relative overflow-hidden">
+                <div class="flex items-center space-x-3 mb-5 border-b border-red-500/25 pb-3">
+                    <i class="fa-solid fa-user-ninja text-[#ff1a2d] text-xl"></i>
+                    <h2 class="font-batman text-2xl sm:text-3xl text-white tracking-wider glow-text-subtle font-semibold">
                         About me
                     </h2>
                 </div>
                 
-                <div class="space-y-3 text-sm text-pink-100/90">
-                    <div class="grid grid-cols-3 border-b border-pink-500/10 pb-2">
-                        <span class="font-medium text-pink-300/70">Name</span>
-                        <span class="col-span-2 font-light">Muhammad Behroz</span>
+                <div class="space-y-3.5 text-sm sm:text-base text-slate-200">
+                    <div class="grid grid-cols-3 border-b border-red-950/60 pb-2">
+                        <span class="font-semibold text-red-400/80 uppercase text-xs tracking-wider flex items-center">
+                            <i class="fa-solid fa-id-card mr-2 text-red-500/60"></i> Name
+                        </span>
+                        <span class="col-span-2 font-medium">Muhammad Behroz</span>
                     </div>
-                    <div class="grid grid-cols-3 border-b border-pink-500/10 pb-2">
-                        <span class="font-medium text-pink-300/70">Age</span>
-                        <span class="col-span-2 font-light">71 years</span>
+                    <div class="grid grid-cols-3 border-b border-red-950/60 pb-2">
+                        <span class="font-semibold text-red-400/80 uppercase text-xs tracking-wider flex items-center">
+                            <i class="fa-solid fa-hourglass-half mr-2 text-red-500/60"></i> Age
+                        </span>
+                        <span class="col-span-2 font-medium">71 years</span>
                     </div>
-                    <div class="grid grid-cols-3 border-b border-pink-500/10 pb-2">
-                        <span class="font-medium text-pink-300/70">Skill</span>
-                        <span class="col-span-2 font-light">Skating</span>
+                    <div class="grid grid-cols-3 border-b border-red-950/60 pb-2">
+                        <span class="font-semibold text-red-400/80 uppercase text-xs tracking-wider flex items-center">
+                            <i class="fa-solid fa-person-skating mr-2 text-red-500/60"></i> Skill
+                        </span>
+                        <span class="col-span-2 font-medium text-[#ff1a2d]">Skating</span>
                     </div>
                     <div class="grid grid-cols-3">
-                        <span class="font-medium text-pink-300/70">Hobbies</span>
-                        <span class="col-span-2 font-light">Cycling and eating</span>
+                        <span class="font-semibold text-red-400/80 uppercase text-xs tracking-wider flex items-center">
+                            <i class="fa-solid fa-heart mr-2 text-red-500/60"></i> Hobbies
+                        </span>
+                        <span class="col-span-2 font-medium">Cycling and eating</span>
                     </div>
                 </div>
             </div>
 
             <!-- CARD 2: Education -->
-            <div class="glass-card rounded-2xl p-6 relative">
-                <h2 class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle font-semibold mb-4">
-                    Education
-                </h2>
+            <div class="gotham-card rounded-2xl p-6 relative">
+                <div class="flex items-center space-x-3 mb-5 border-b border-red-500/25 pb-3">
+                    <i class="fa-solid fa-graduation-cap text-[#ff1a2d] text-xl"></i>
+                    <h2 class="font-batman text-2xl sm:text-3xl text-white tracking-wider glow-text-subtle font-semibold">
+                        Education
+                    </h2>
+                </div>
 
-                <div class="relative pl-6 space-y-6 border-l border-pink-500/30 ml-2 my-2">
+                <div class="relative pl-6 space-y-6 border-l border-red-500/40 ml-2 my-2">
                     <!-- Education 1 -->
                     <div class="relative group">
-                        <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#ff75a0] timeline-dot border-2 border-[#1c0812]"></div>
-                        <h3 class="text-sm sm:text-base font-semibold text-white group-hover:text-[#ff8dae] transition-colors">
+                        <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#ff1a2d] bat-dot border-2 border-black"></div>
+                        <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-[#ff1a2d] transition-colors">
                             Capstone International School Dhaka
                         </h3>
-                        <p class="text-xs text-pink-200/70 mt-0.5">O level passed</p>
+                        <p class="text-xs text-red-200/70 mt-0.5 tracking-wide font-medium">
+                            <i class="fa-solid fa-check-double mr-1 text-[#ff1a2d]"></i> O level passed
+                        </p>
                     </div>
 
                     <!-- Education 2 -->
                     <div class="relative group">
-                        <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#ff2a75] timeline-dot border-2 border-[#1c0812]"></div>
-                        <h3 class="text-sm sm:text-base font-semibold text-white group-hover:text-[#ff8dae] transition-colors">
+                        <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#d60b1e] bat-dot border-2 border-black"></div>
+                        <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-[#ff1a2d] transition-colors">
                             Manarat Dhaka International School and College
                         </h3>
-                        <p class="text-xs text-pink-200/70 mt-0.5">Currently studying</p>
+                        <p class="text-xs text-red-200/70 mt-0.5 tracking-wide font-medium">
+                            <i class="fa-solid fa-spinner animate-spin mr-1 text-red-400"></i> Currently studying
+                        </p>
                     </div>
                 </div>
             </div>
@@ -252,57 +291,67 @@
         <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
 
             <!-- CARD 3: Skill -->
-            <div class="glass-card rounded-2xl p-6">
-                <h2 class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle font-semibold mb-4">
-                    Skill
-                </h2>
+            <div class="gotham-card rounded-2xl p-6">
+                <div class="flex items-center space-x-3 mb-5 border-b border-red-500/25 pb-3">
+                    <i class="fa-solid fa-person-skating text-[#ff1a2d] text-xl"></i>
+                    <h2 class="font-batman text-2xl sm:text-3xl text-white tracking-wider glow-text-subtle font-semibold">
+                        Skill
+                    </h2>
+                </div>
                 <div class="flex flex-wrap gap-3">
-                    <span class="tag-badge tag-badge-filled px-5 py-2 rounded-full text-xs font-medium cursor-default">
-                        Skating
+                    <span class="tag-badge tag-badge-filled px-6 py-2.5 rounded-full text-xs sm:text-sm tracking-wider uppercase flex items-center gap-2 cursor-default">
+                        <i class="fa-solid fa-person-skating"></i> Skating
                     </span>
                 </div>
             </div>
 
             <!-- CARD 4: Hobbies -->
-            <div class="glass-card rounded-2xl p-6">
-                <h2 class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle font-semibold mb-4">
-                    Hobbies
-                </h2>
+            <div class="gotham-card rounded-2xl p-6">
+                <div class="flex items-center space-x-3 mb-5 border-b border-red-500/25 pb-3">
+                    <i class="fa-solid fa-icons text-[#ff1a2d] text-xl"></i>
+                    <h2 class="font-batman text-2xl sm:text-3xl text-white tracking-wider glow-text-subtle font-semibold">
+                        Hobbies
+                    </h2>
+                </div>
                 <div class="flex flex-wrap gap-3">
-                    <span class="tag-badge px-5 py-2 rounded-full text-xs font-medium cursor-pointer">
-                        Cycling
+                    <span class="tag-badge px-5 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wider flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-person-biking"></i> Cycling
                     </span>
-                    <span class="tag-badge px-5 py-2 rounded-full text-xs font-medium cursor-pointer">
-                        Eating
+                    <span class="tag-badge px-5 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wider flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-utensils"></i> Eating
                     </span>
                 </div>
             </div>
 
         </div>
 
-        <div class="w-full glass-card rounded-2xl p-6 sm:p-8 glow-border-box relative overflow-hidden">
-            <h2 class="font-cursive text-3xl sm:text-4xl text-[#ff8dae] glow-text-title font-semibold mb-6">
-                Age counter
-            </h2>
+        <!-- AGE COUNTER SECTION -->
+        <div class="w-full gotham-card rounded-2xl p-6 sm:p-8 glow-border-box relative overflow-hidden">
+            <div class="flex items-center space-x-3 mb-6 border-b border-red-500/30 pb-3">
+                <i class="fa-solid fa-stopwatch text-[#ff1a2d] text-2xl glow-text-bat"></i>
+                <h2 class="font-batman text-3xl sm:text-4xl text-white tracking-widest glow-text-bat font-bold">
+                    Age counter
+                </h2>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 <!-- Live Age counter -->
-                <div class="border border-pink-500/20 bg-pink-950/20 rounded-xl p-5 text-center flex flex-col justify-center space-y-2 border-dashed">
-                    <span class="text-xs sm:text-sm text-pink-300/80 font-medium tracking-wide">
-                        Age right now
+                <div class="border border-red-500/30 bg-black/70 rounded-xl p-5 text-center flex flex-col justify-center space-y-2 border-dashed">
+                    <span class="text-xs sm:text-sm text-red-300/80 font-semibold tracking-widest uppercase flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-clock"></i> Age right now
                     </span>
-                    <div id="ageRealtime" class="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-wider glow-text-subtle py-1">
+                    <div id="ageRealtime" class="text-base sm:text-lg md:text-xl font-bold text-white tracking-wider glow-text-subtle py-1 font-mono">
                         71 years, 274 days, 00:00:00
                     </div>
                 </div>
 
                 <!-- Next Birthday countdown -->
-                <div class="border border-pink-500/20 bg-pink-950/20 rounded-xl p-5 text-center flex flex-col justify-center space-y-2 border-dashed">
-                    <span class="text-xs sm:text-sm text-pink-300/80 font-medium tracking-wide">
-                        Next birthday in
+                <div class="border border-red-500/30 bg-black/70 rounded-xl p-5 text-center flex flex-col justify-center space-y-2 border-dashed">
+                    <span class="text-xs sm:text-sm text-red-300/80 font-semibold tracking-widest uppercase flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-calendar-day"></i> Next birthday in
                     </span>
-                    <div id="nextBirthday" class="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-wider glow-text-subtle py-1">
+                    <div id="nextBirthday" class="text-base sm:text-lg md:text-xl font-bold text-white tracking-wider glow-text-subtle py-1 font-mono">
                         90 days, 11:09:20
                     </div>
                 </div>
@@ -312,18 +361,19 @@
 
     </main>
 
+    <!-- FOOTER -->
     <footer class="w-full max-w-4xl mx-auto z-10 text-center py-8 mt-6 flex flex-col items-center space-y-3">
-        <p class="font-cursive text-2xl sm:text-3xl text-[#ff8dae] glow-text-subtle">
-            Thanks for visiting my page
+        <p class="font-cinzel text-xl sm:text-2xl text-red-500 glow-text-subtle font-semibold tracking-wider">
+            Gotham protects its own. Thanks for visiting.
         </p>
-        <div class="text-[#ff75a0] text-xl animate-bounce glow-text-title mt-1">
-            🌸
+        <div class="text-[#ff1a2d] text-3xl glow-text-bat mt-1 animate-pulse">
+            <i class="fa-solid fa-shield-cat"></i>
         </div>
     </footer>
 
     <script>
         // --- 1. Typewriter Animation Effect ---
-        const words = ["Skating", "Cycling", "Eating", "Student"];
+        const words = ["Red Knight of Skating", "Skater Extraordinaire", "Cyclist & Foodie", "Gotham Vigilante"];
         let wordIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -339,10 +389,10 @@
                 charIndex++;
             }
 
-            let typeSpeed = isDeleting ? 60 : 120;
+            let typeSpeed = isDeleting ? 50 : 100;
 
             if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 1800;
+                typeSpeed = 2000;
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
@@ -353,8 +403,8 @@
             setTimeout(typeEffect, typeSpeed);
         }
 
-        // --- 2. Live Age & Next Birthday Counter Logic ---
-        // Birthdate anchored for 71 years old
+        // --- 2. Real-time Age & Birthday Counter ---
+        // Birthdate configured for 71 years old
         const birthDate = new Date(1955, 0, 1, 0, 0, 0); 
 
         function updateCounters() {
@@ -392,7 +442,7 @@
                 `${bdayDays} days, ${bdayHours}:${bdayMinutes}:${bdaySeconds}`;
         }
 
-        // --- 3. Interactive Profile Photo Input ---
+        // --- 3. Interactive Profile Photo Upload ---
         const photoInput = document.getElementById('photoInput');
         const avatarImage = document.getElementById('avatarImage');
 
@@ -407,7 +457,7 @@
             }
         });
 
-        // --- 4. Interactive Floating Sakura Petals Canvas ---
+        // --- 4. Batman Canvas Particle Engine: Flying Crimson Bats & Red Energy Particles ---
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -419,34 +469,33 @@
             height = canvas.height = window.innerHeight;
         });
 
-        const numParticles = 45;
-        const particles = [];
+        const batCount = 38;
+        const batParticles = [];
 
-        class Particle {
+        class BatParticle {
             constructor() {
                 this.reset();
             }
 
             reset() {
                 this.x = Math.random() * width;
-                this.y = Math.random() * -height;
-                this.size = Math.random() * 8 + 6;
-                this.speedY = Math.random() * 1.2 + 0.6;
-                this.speedX = Math.random() * 0.8 - 0.4;
-                this.rotation = Math.random() * 360;
-                this.rotationSpeed = (Math.random() - 0.5) * 1.5;
-                this.opacity = Math.random() * 0.7 + 0.3;
-                this.isBokeh = Math.random() > 0.6;
+                this.y = height + Math.random() * 100;
+                this.size = Math.random() * 12 + 10;
+                this.speedY = -(Math.random() * 1.5 + 0.8);
+                this.speedX = (Math.random() - 0.5) * 1.2;
+                this.wingAngle = 0;
+                this.wingSpeed = Math.random() * 0.2 + 0.15;
+                this.opacity = Math.random() * 0.65 + 0.35;
+                this.isGlowParticle = Math.random() > 0.68;
             }
 
             update() {
                 this.y += this.speedY;
-                this.x += Math.sin(this.y * 0.01) + this.speedX;
-                this.rotation += this.rotationSpeed;
+                this.x += Math.sin(this.y * 0.02) + this.speedX;
+                this.wingAngle += this.wingSpeed;
 
-                if (this.y > height + 20) {
+                if (this.y < -30) {
                     this.reset();
-                    this.y = -10;
                 }
             }
 
@@ -454,24 +503,32 @@
                 ctx.save();
                 ctx.translate(this.x, this.y);
 
-                if (this.isBokeh) {
+                if (this.isGlowParticle) {
+                    // Crimson Gotham Bat-Signal Particle
                     ctx.beginPath();
-                    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size * 2);
-                    gradient.addColorStop(0, `rgba(255, 117, 160, ${this.opacity})`);
-                    gradient.addColorStop(1, 'rgba(255, 42, 117, 0)');
+                    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size * 1.6);
+                    gradient.addColorStop(0, `rgba(255, 26, 45, ${this.opacity * 0.85})`);
+                    gradient.addColorStop(1, 'rgba(214, 11, 30, 0)');
                     ctx.fillStyle = gradient;
-                    ctx.arc(0, 0, this.size * 2, 0, Math.PI * 2);
+                    ctx.arc(0, 0, this.size * 1.6, 0, Math.PI * 2);
                     ctx.fill();
                 } else {
-                    ctx.rotate((this.rotation * Math.PI) / 180);
+                    // Crimson Vector Silhouette Flying Bat
+                    const wingSpread = Math.sin(this.wingAngle) * (this.size * 0.5);
+                    ctx.fillStyle = `rgba(255, 26, 45, ${this.opacity})`;
+                    ctx.shadowColor = 'rgba(255, 26, 45, 0.85)';
+                    ctx.shadowBlur = 12;
+
                     ctx.beginPath();
-                    ctx.fillStyle = `rgba(255, 150, 185, ${this.opacity})`;
-                    ctx.shadowColor = 'rgba(255, 42, 117, 0.8)';
-                    ctx.shadowBlur = 8;
-                    
-                    ctx.moveTo(0, -this.size);
-                    ctx.bezierCurveTo(this.size / 2, -this.size / 2, this.size / 2, this.size / 2, 0, this.size);
-                    ctx.bezierCurveTo(-this.size / 2, this.size / 2, -this.size / 2, -this.size / 2, 0, -this.size);
+                    // Bat silhouette path
+                    ctx.moveTo(0, -this.size * 0.3);
+                    // Right Wing
+                    ctx.quadraticCurveTo(this.size * 0.6, -this.size * 0.8 - wingSpread, this.size * 1.2, -this.size * 0.2 + wingSpread);
+                    ctx.quadraticCurveTo(this.size * 0.7, this.size * 0.4, 0, this.size * 0.3);
+                    // Left Wing
+                    ctx.quadraticCurveTo(-this.size * 0.7, this.size * 0.4, -this.size * 1.2, -this.size * 0.2 + wingSpread);
+                    ctx.quadraticCurveTo(-this.size * 0.6, -this.size * 0.8 - wingSpread, 0, -this.size * 0.3);
+                    ctx.closePath();
                     ctx.fill();
                 }
 
@@ -479,15 +536,15 @@
             }
         }
 
-        for (let i = 0; i < numParticles; i++) {
-            particles.push(new Particle());
+        for (let i = 0; i < batCount; i++) {
+            batParticles.push(new BatParticle());
         }
 
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+            batParticles.forEach(bat => {
+                bat.update();
+                bat.draw();
             });
             requestAnimationFrame(animateCanvas);
         }
