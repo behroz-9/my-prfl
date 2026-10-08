@@ -6,7 +6,7 @@
     <title>Muhammad Behroz | The Dark Knight Portfolio</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Oswald (Gotham Tech) & Rajdhani (Futuristic Hero) -->
+    <!-- Google Fonts: Oswald & Rajdhani & Cinzel -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Rajdhani:wght@400;500;600;700&family=Cinzel:wght@600;800;900&display=swap" rel="stylesheet">
@@ -209,9 +209,25 @@
             box-shadow: 0 0 12px rgba(255, 26, 45, 0.8);
         }
 
+        /* Emoji Button Animation */
+        .emoji-btn {
+            background: rgba(20, 10, 12, 0.8);
+            border: 1px solid rgba(255, 26, 45, 0.3);
+            transition: all 0.2s ease-in-out;
+        }
+        .emoji-btn:hover {
+            border-color: #ff1a2d;
+            background: rgba(255, 26, 45, 0.15);
+            box-shadow: 0 0 15px rgba(255, 26, 45, 0.4);
+            transform: scale(1.08);
+        }
+        .emoji-btn:active {
+            transform: scale(0.95);
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #040203;
@@ -254,12 +270,10 @@
 
         <!-- HEADER SECTION -->
         <header class="flex flex-col items-center text-center space-y-4 pt-2">
-            <!-- Red Bat Silhouette Header Icon -->
             <div class="text-[#ff1a2d] text-4xl sm:text-5xl glow-text-bat animate-pulse">
                 <i class="fa-solid fa-mask"></i>
             </div>
 
-            <!-- Profile Avatar with glowing Red Bat-Signal frame -->
             <div class="relative">
                 <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden bat-avatar-glow border-2 border-[#ff1a2d] bg-zinc-900 flex items-center justify-center relative">
                     <img id="avatarImage" 
@@ -271,18 +285,15 @@
                 </div>
             </div>
 
-            <!-- Glowing Crimson Batman Title -->
             <h1 class="font-batman text-4xl sm:text-6xl md:text-7xl text-white tracking-widest glow-text-bat font-bold mt-2">
                 Muhammad Behroz
             </h1>
 
-            <!-- Dynamic Typewriter Subtitle -->
             <div class="h-6 flex items-center justify-center text-red-100/90 text-base sm:text-lg font-medium tracking-wider glow-text-subtle">
                 <span class="text-[#ff1a2d] mr-2"><i class="fa-solid fa-bolt"></i></span>
                 <span id="typewriterText"></span><span class="cursor-blink text-[#ff1a2d] ml-0.5">|</span>
             </div>
 
-            <!-- Age & Hero Status Badge -->
             <div class="mt-1 inline-flex items-center justify-center px-6 py-2 rounded-full text-xs font-bold tracking-widest uppercase text-red-400 border border-red-500/60 bg-black/80 backdrop-blur-md shadow-[0_0_20px_rgba(255,26,45,0.4)]">
                 <i class="fa-solid fa-shield-halved mr-2 text-[#ff1a2d]"></i> Gotham Defender • Age: <span id="headerAgeBadge" class="ml-1 text-white">71</span>
             </div>
@@ -338,7 +349,6 @@
                 </div>
 
                 <div class="relative pl-6 space-y-6 border-l border-red-500/40 ml-2 my-2">
-                    <!-- Education 1 -->
                     <div class="relative group">
                         <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#ff1a2d] bat-dot border-2 border-black"></div>
                         <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-[#ff1a2d] transition-colors">
@@ -349,7 +359,6 @@
                         </p>
                     </div>
 
-                    <!-- Education 2 -->
                     <div class="relative group">
                         <div class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#d60b1e] bat-dot border-2 border-black"></div>
                         <h3 class="text-sm sm:text-base font-bold text-white group-hover:text-[#ff1a2d] transition-colors">
@@ -421,6 +430,157 @@
 
         </div>
 
+        <!-- EMOJI REACTION SECTION -->
+        <div class="w-full gotham-card rounded-2xl p-6">
+            <div class="flex items-center space-x-3 mb-5 border-b border-red-500/30 pb-3">
+                <i class="fa-solid fa-icons text-[#ff1a2d] text-xl glow-text-subtle"></i>
+                <h2 class="font-batman text-2xl sm:text-3xl text-white tracking-wider glow-text-subtle font-semibold">
+                    Signal Reactions
+                </h2>
+            </div>
+
+            <p class="text-xs text-slate-300 mb-4 font-medium">Leave a reaction for Gotham's Knight:</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-6 gap-3">
+                <button onclick="addReaction('love')" class="emoji-btn p-3 rounded-xl flex items-center justify-between">
+                    <span class="text-2xl">❤️</span>
+                    <div class="text-right">
+                        <span id="count-love" class="text-sm font-bold text-white block">0</span>
+                        <span class="text-[10px] text-red-400/80 uppercase tracking-widest font-mono">Love</span>
+                    </div>
+                </button>
+
+                <button onclick="addReaction('fire')" class="emoji-btn p-3 rounded-xl flex items-center justify-between">
+                    <span class="text-2xl">🔥</span>
+                    <div class="text-right">
+                        <span id="count-fire" class="text-sm font-bold text-white block">0</span>
+                        <span class="text-[10px] text-red-400/80 uppercase tracking-widest font-mono">Fire</span>
+                    </div>
+                </button>
+
+                <button onclick="addReaction('like')" class="emoji-btn p-3 rounded-xl flex items-center justify-between">
+                    <span class="text-2xl">👍</span>
+                    <div class="text-right">
+                        <span id="count-like" class="text-sm font-bold text-white block">0</span>
+                        <span class="text-[10px] text-red-400/80 uppercase tracking-widest font-mono">Like</span>
+                    </div>
+                </button>
+
+                <button onclick="addReaction('clap')" class="emoji-btn p-3 rounded-xl flex items-center justify-between">
+                    <span class="text-2xl">👏</span>
+                    <div class="text-right">
+                        <span id="count-clap" class="text-sm font-bold text-white block">0</span>
+                        <span class="text-[10px] text-red-400/80 uppercase tracking-widest font-mono">Clap</span>
+                    </div>
+                </button>
+
+                <button onclick="addReaction('bat')" class="emoji-btn p-3 rounded-xl flex items-center justify-between">
+                    <span class="text-2xl">🦇</span>
+                    <div class="text-right">
+                        <span id="count-bat" class="text-sm font-bold text-white block">0</span>
+                        <span class="text-[10px] text-red-400/80 uppercase tracking-widest font-mono">Bat</span>
+                    </div>
+                </button>
+
+                <button onclick="addReaction('cool')" class="emoji-btn p-3 rounded-xl flex items-center justify-between">
+                    <span class="text-2xl">😎</span>
+                    <div class="text-right">
+                        <span id="count-cool" class="text-sm font-bold text-white block">0</span>
+                        <span class="text-[10px] text-red-400/80 uppercase tracking-widest font-mono">Cool</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- PUBLIC COMMENTS & PRIVATE INBOX SECTION -->
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- SIDE 1: PUBLIC COMMENT BOX WITH COMMENT COUNT -->
+            <div class="gotham-card rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4 border-b border-red-500/30 pb-3">
+                        <i class="fa-solid fa-comments text-[#ff1a2d] text-xl glow-text-subtle"></i>
+                        <h2 class="font-batman text-2xl sm:text-3xl text-white tracking-wider glow-text-subtle font-semibold">
+                            Public Transmission
+                        </h2>
+                    </div>
+
+                    <div class="space-y-3 mb-4">
+                        <input id="commenterName" type="text" placeholder="Your Username / Codename..." 
+                               class="w-full bg-black/80 border border-red-500/40 rounded-lg px-3 py-2 text-xs sm:text-sm text-white placeholder-red-300/40 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 font-mono">
+                        
+                        <div class="flex space-x-2">
+                            <input id="commentInput" type="text" placeholder="Transmit a public comment..." 
+                                   class="flex-1 bg-black/80 border border-red-500/40 rounded-lg px-3 py-2 text-xs sm:text-sm text-white placeholder-red-300/40 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 font-mono">
+                            <button onclick="postComment()" class="bg-red-600 hover:bg-red-500 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider transition-colors flex items-center gap-1 shadow-[0_0_10px_rgba(255,26,45,0.5)]">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h3 class="text-[11px] font-mono uppercase tracking-widest text-red-400/80 mb-2 border-b border-red-950 pb-1 flex justify-between">
+                        <span>Recent Transmissions</span>
+                        <span class="text-slate-400">Shows User Comment Count</span>
+                    </h3>
+                    <div id="commentsContainer" class="max-h-48 overflow-y-auto space-y-2 pr-1 text-xs">
+                        <!-- Public Comments Display -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDE 2: PRIVATE SECURE INBOX (USER WITH ADMIN CHAT) -->
+            <div class="gotham-card rounded-2xl p-6 flex flex-col justify-between border-red-500/60">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4 border-b border-red-500/30 pb-3">
+                        <i class="fa-solid fa-user-lock text-[#ff1a2d] text-xl glow-text-subtle"></i>
+                        <h2 class="font-batman text-2xl sm:text-3xl text-white tracking-wider glow-text-subtle font-semibold">
+                            Private Encrypted Inbox
+                        </h2>
+                    </div>
+
+                    <!-- Passcode Lock Interface -->
+                    <div id="privateAuthBox" class="space-y-3 mb-4">
+                        <p class="text-xs text-slate-300">Enter your Username & 4-Digit Lock Passcode to open private chat with Admin:</p>
+                        
+                        <input id="privateUsername" type="text" placeholder="Enter your unique username..." 
+                               class="w-full bg-black/80 border border-red-500/40 rounded-lg px-3 py-2 text-xs sm:text-sm text-white placeholder-red-300/40 focus:outline-none focus:border-red-500 font-mono">
+                        
+                        <div class="flex space-x-2">
+                            <input id="privatePasscode" type="password" maxlength="4" placeholder="4-Digit Passcode" 
+                                   class="w-full bg-black/80 border border-red-500/40 rounded-lg px-3 py-2 text-xs sm:text-sm text-white placeholder-red-300/40 focus:outline-none focus:border-red-500 font-mono">
+                            <button onclick="unlockPrivateInbox()" class="bg-red-700 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider transition-colors flex items-center gap-1 shadow-[0_0_10px_rgba(255,26,45,0.5)]">
+                                <i class="fa-solid fa-lock-open"></i> Open
+                            </button>
+                        </div>
+                        <p class="text-[10px] text-red-400/80 font-mono">* First-time user passcode will be saved automatically as key.</p>
+                    </div>
+
+                    <!-- Private Active Chat Area (Hidden by Default) -->
+                    <div id="privateChatArea" class="hidden flex-col h-full">
+                        <div class="flex justify-between items-center bg-red-950/40 p-2 rounded border border-red-500/30 mb-2">
+                            <span class="text-xs font-bold text-red-300 font-mono" id="currentChatUserHeader"><i class="fa-solid fa-user-shield mr-1"></i> Inbox</span>
+                            <button onclick="lockPrivateInbox()" class="text-[10px] text-red-400 hover:text-white uppercase font-bold underline">Lock Inbox</button>
+                        </div>
+
+                        <div id="privateMessagesContainer" class="h-32 overflow-y-auto space-y-2 pr-1 text-xs mb-3 bg-black/60 p-2 rounded border border-red-900/30">
+                            <!-- Private Messages Display -->
+                        </div>
+
+                        <div class="flex space-x-2">
+                            <input id="privateMsgInput" type="text" placeholder="Private message to Admin..." 
+                                   class="flex-1 bg-black/80 border border-red-500/40 rounded-lg px-3 py-2 text-xs text-white placeholder-red-300/40 focus:outline-none focus:border-red-500 font-mono">
+                            <button onclick="sendPrivateMessage()" class="bg-red-600 hover:bg-red-500 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase transition-colors">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <!-- BATCAVE TACTICAL EQUIPMENT / STATS -->
         <div class="w-full gotham-card rounded-2xl p-6 sm:p-8">
             <div class="flex items-center space-x-3 mb-6 border-b border-red-500/30 pb-3">
@@ -442,7 +602,7 @@
                     <span class="text-sm sm:text-base font-bold text-white mt-1">Kevlar Weave</span>
                 </div>
                 <div class="p-4 rounded-xl bg-black/60 border border-red-500/30 flex flex-col items-center">
-                    <i class="fa-solid fa-[#ff1a2d] fa-crosshairs text-2xl text-[#ff1a2d] mb-2"></i>
+                    <i class="fa-solid fa-crosshairs text-2xl text-[#ff1a2d] mb-2"></i>
                     <span class="text-xs text-slate-400 uppercase tracking-widest font-bold">Stealth</span>
                     <span class="text-sm sm:text-base font-bold text-white mt-1">Class-A Shadow</span>
                 </div>
@@ -464,8 +624,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <!-- Live Age counter -->
                 <div class="border border-red-500/40 bg-black/80 rounded-xl p-5 text-center flex flex-col justify-center space-y-2 border-dashed shadow-[inset_0_0_15px_rgba(255,26,45,0.15)]">
                     <span class="text-xs sm:text-sm text-red-300/80 font-semibold tracking-widest uppercase flex items-center justify-center gap-2">
                         <i class="fa-solid fa-clock text-[#ff1a2d]"></i> Active Duty Duration
@@ -475,7 +633,6 @@
                     </div>
                 </div>
 
-                <!-- Next Birthday countdown -->
                 <div class="border border-red-500/40 bg-black/80 rounded-xl p-5 text-center flex flex-col justify-center space-y-2 border-dashed shadow-[inset_0_0_15px_rgba(255,26,45,0.15)]">
                     <span class="text-xs sm:text-sm text-red-300/80 font-semibold tracking-widest uppercase flex items-center justify-center gap-2">
                         <i class="fa-solid fa-calendar-day text-[#ff1a2d]"></i> Next Vigil Milestone
@@ -484,7 +641,6 @@
                         90 days, 11:09:20
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -563,7 +719,6 @@
             document.getElementById('ageRealtime').textContent = 
                 `${years} years, ${daysInCurrentYear} days, ${hours}:${minutes}:${seconds}`;
 
-            // Calculate Next Birthday
             let nextBdayYear = now.getFullYear();
             let nextBday = new Date(nextBdayYear, birthDate.getMonth(), birthDate.getDate());
             
@@ -582,7 +737,208 @@
                 `${bdayDays} days, ${bdayHours}:${bdayMinutes}:${bdaySeconds}`;
         }
 
-        // --- 4. Smooth Cursor Follower & Dynamic Embers Trail ---
+        // --- 4. Emoji Reaction Counter Logic ---
+        const reactionData = { love: 12, fire: 18, like: 25, clap: 8, bat: 31, cool: 15 };
+
+        function loadReactions() {
+            const saved = localStorage.getItem('behroz_reactions');
+            if (saved) Object.assign(reactionData, JSON.parse(saved));
+            for (const key in reactionData) {
+                const el = document.getElementById(`count-${key}`);
+                if (el) el.textContent = reactionData[key];
+            }
+        }
+
+        function addReaction(type) {
+            if (reactionData.hasOwnProperty(type)) {
+                reactionData[type]++;
+                document.getElementById(`count-${type}`).textContent = reactionData[type];
+                localStorage.setItem('behroz_reactions', JSON.stringify(reactionData));
+            }
+        }
+
+        // --- 5. PUBLIC COMMENTS WITH USER COMMENT COUNTS ---
+        let commentsList = [
+            { name: "Nightwing", text: "Awesome portfolio Behroz! Extreme skating skills 🔥" },
+            { name: "Alfred", text: "Your stamina at 71 is truly remarkable, sir." }
+        ];
+        let userCommentCounts = {};
+
+        function loadComments() {
+            const savedComments = localStorage.getItem('behroz_comments');
+            if (savedComments) commentsList = JSON.parse(savedComments);
+
+            const savedCounts = localStorage.getItem('behroz_comment_counts');
+            if (savedCounts) userCommentCounts = JSON.parse(savedCounts);
+
+            renderComments();
+        }
+
+        function renderComments() {
+            const container = document.getElementById('commentsContainer');
+            container.innerHTML = '';
+            
+            if (commentsList.length === 0) {
+                container.innerHTML = '<p class="text-slate-500 italic">No transmissions yet. Be the first!</p>';
+                return;
+            }
+
+            commentsList.forEach(c => {
+                const count = userCommentCounts[c.name] || 1;
+                const commentEl = document.createElement('div');
+                commentEl.className = 'bg-black/60 border border-red-900/40 rounded p-2 text-slate-200';
+                commentEl.innerHTML = `
+                    <div class="flex justify-between items-center mb-0.5">
+                        <span class="font-bold text-red-400 font-mono text-[11px] flex items-center gap-1">
+                            <i class="fa-solid fa-user-shield text-[10px]"></i>
+                            ${escapeHtml(c.name)}
+                            <span class="bg-red-950/80 text-red-300 border border-red-700/50 text-[9px] px-1.5 py-0.2 rounded ml-1">${count} comments</span>
+                        </span>
+                    </div>
+                    <p class="text-slate-300">${escapeHtml(c.text)}</p>
+                `;
+                container.appendChild(commentEl);
+            });
+        }
+
+        function postComment() {
+            const nameInput = document.getElementById('commenterName');
+            const textInput = document.getElementById('commentInput');
+
+            const name = nameInput.value.trim() || 'Anonymous Ally';
+            const text = textInput.value.trim();
+
+            if (!text) return;
+
+            userCommentCounts[name] = (userCommentCounts[name] || 0) + 1;
+            commentsList.unshift({ name: name, text: text });
+
+            localStorage.setItem('behroz_comments', JSON.stringify(commentsList));
+            localStorage.setItem('behroz_comment_counts', JSON.stringify(userCommentCounts));
+
+            textInput.value = '';
+            renderComments();
+        }
+
+        // --- 6. SECURE PRIVATE INBOX WITH ADMIN ---
+        let activePrivateUser = "";
+        let privateKeys = {}; // Stores username: passcode
+        let privateMessages = {}; // Stores username: [messages]
+        const ADMIN_MASTER_KEY = "9999"; // Admin Master Passcode to open any user chat
+
+        function loadPrivateStorage() {
+            const savedKeys = localStorage.getItem('behroz_private_keys');
+            if (savedKeys) privateKeys = JSON.parse(savedKeys);
+
+            const savedMsgs = localStorage.getItem('behroz_private_msgs');
+            if (savedMsgs) privateMessages = JSON.parse(savedMsgs);
+        }
+
+        function unlockPrivateInbox() {
+            const user = document.getElementById('privateUsername').value.trim();
+            const passcode = document.getElementById('privatePasscode').value.trim();
+
+            if (!user || !passcode || passcode.length < 4) {
+                alert("Please enter a valid Username and 4-digit Passcode.");
+                return;
+            }
+
+            // Check if Admin Master Access
+            if (passcode === ADMIN_MASTER_KEY) {
+                activePrivateUser = user;
+                openChatView();
+                return;
+            }
+
+            // Lock verification logic
+            if (!privateKeys[user]) {
+                privateKeys[user] = passcode;
+                localStorage.setItem('behroz_private_keys', JSON.stringify(privateKeys));
+                alert(`Passcode saved! Private Inbox activated for ${user}.`);
+            } else if (privateKeys[user] !== passcode) {
+                alert("Incorrect Lock Passcode! Access Denied.");
+                return;
+            }
+
+            activePrivateUser = user;
+            openChatView();
+        }
+
+        function openChatView() {
+            document.getElementById('privateAuthBox').style.display = 'none';
+            const chatArea = document.getElementById('privateChatArea');
+            chatArea.classList.remove('hidden');
+            chatArea.classList.add('flex');
+
+            document.getElementById('currentChatUserHeader').innerHTML = 
+                `<i class="fa-solid fa-lock text-red-500 mr-1"></i> Private Chat: ${escapeHtml(activePrivateUser)} & Admin`;
+
+            renderPrivateMessages();
+        }
+
+        function lockPrivateInbox() {
+            activePrivateUser = "";
+            document.getElementById('privatePasscode').value = "";
+            const chatArea = document.getElementById('privateChatArea');
+            chatArea.classList.add('hidden');
+            chatArea.classList.remove('flex');
+            document.getElementById('privateAuthBox').style.display = 'block';
+        }
+
+        function sendPrivateMessage() {
+            if (!activePrivateUser) return;
+            const msgInput = document.getElementById('privateMsgInput');
+            const text = msgInput.value.trim();
+
+            if (!text) return;
+
+            if (!privateMessages[activePrivateUser]) {
+                privateMessages[activePrivateUser] = [];
+            }
+
+            privateMessages[activePrivateUser].push({
+                sender: activePrivateUser,
+                text: text,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            });
+
+            localStorage.setItem('behroz_private_msgs', JSON.stringify(privateMessages));
+            msgInput.value = '';
+            renderPrivateMessages();
+        }
+
+        function renderPrivateMessages() {
+            const container = document.getElementById('privateMessagesContainer');
+            container.innerHTML = '';
+
+            const msgs = privateMessages[activePrivateUser] || [];
+
+            if (msgs.length === 0) {
+                container.innerHTML = '<p class="text-slate-500 italic text-center py-4">No private transmissions yet. Send a message to Admin!</p>';
+                return;
+            }
+
+            msgs.forEach(m => {
+                const msgEl = document.createElement('div');
+                msgEl.className = 'bg-red-950/40 border border-red-800/40 p-1.5 rounded text-slate-200';
+                msgEl.innerHTML = `
+                    <div class="flex justify-between text-[10px] text-red-400 font-mono mb-0.5">
+                        <span class="font-bold">${escapeHtml(m.sender)}</span>
+                        <span>${m.time}</span>
+                    </div>
+                    <p class="text-xs text-slate-300">${escapeHtml(m.text)}</p>
+                `;
+                container.appendChild(msgEl);
+            });
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // --- 7. Smooth Cursor Follower ---
         const cursorGlow = document.getElementById('cursorGlow');
         const cursorSpotlight = document.getElementById('cursorSpotlight');
         
@@ -595,10 +951,7 @@
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-
-            if (Math.random() > 0.35) {
-                trailParticles.push(new CursorTrailParticle(mouseX, mouseY));
-            }
+            if (Math.random() > 0.35) trailParticles.push(new CursorTrailParticle(mouseX, mouseY));
         });
 
         class CursorTrailParticle {
@@ -610,13 +963,11 @@
                 this.speedX = (Math.random() - 0.5) * 1.8;
                 this.speedY = (Math.random() - 0.5) * 1.8 - 0.6;
             }
-
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
                 this.opacity -= 0.035;
             }
-
             draw(ctx) {
                 ctx.save();
                 ctx.beginPath();
@@ -632,18 +983,15 @@
         function updateCursorPosition() {
             cursorX += (mouseX - cursorX) * 0.22;
             cursorY += (mouseY - cursorY) * 0.22;
-
             cursorGlow.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
             cursorSpotlight.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
-
             requestAnimationFrame(updateCursorPosition);
         }
         updateCursorPosition();
 
-        // --- 5. Advanced Batman Canvas Engine (Flying Bats & Bat-Signal Sparks) ---
+        // --- 8. Canvas Background Engine ---
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
-
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
 
@@ -656,10 +1004,7 @@
         const batParticles = [];
 
         class BatParticle {
-            constructor() {
-                this.reset();
-            }
-
+            constructor() { this.reset(); }
             reset() {
                 this.x = Math.random() * width;
                 this.y = height + Math.random() * 120;
@@ -671,17 +1016,12 @@
                 this.opacity = Math.random() * 0.7 + 0.3;
                 this.isGlowParticle = Math.random() > 0.72;
             }
-
             update() {
                 this.y += this.speedY;
                 this.x += Math.sin(this.y * 0.02) + this.speedX;
                 this.wingAngle += this.wingSpeed;
-
-                if (this.y < -40) {
-                    this.reset();
-                }
+                if (this.y < -40) this.reset();
             }
-
             draw() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
@@ -709,26 +1049,20 @@
                     ctx.closePath();
                     ctx.fill();
                 }
-
                 ctx.restore();
             }
         }
 
-        for (let i = 0; i < batCount; i++) {
-            batParticles.push(new BatParticle());
-        }
+        for (let i = 0; i < batCount; i++) batParticles.push(new BatParticle());
 
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
 
-            // Draw Cursor Embers
             for (let i = trailParticles.length - 1; i >= 0; i--) {
                 const particle = trailParticles[i];
                 particle.update();
                 particle.draw(ctx);
-                if (particle.opacity <= 0) {
-                    trailParticles.splice(i, 1);
-                }
+                if (particle.opacity <= 0) trailParticles.splice(i, 1);
             }
 
             batParticles.forEach(bat => {
@@ -742,6 +1076,9 @@
             typeEffect();
             updateCounters();
             setInterval(updateCounters, 1000);
+            loadReactions();
+            loadComments();
+            loadPrivateStorage();
             animateCanvas();
         };
     </script>
