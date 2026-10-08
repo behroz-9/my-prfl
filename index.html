@@ -260,19 +260,15 @@
             </div>
 
             <!-- Profile Avatar with glowing Red Bat-Signal frame -->
-            <div class="relative group cursor-pointer" id="avatarContainer">
+            <div class="relative">
                 <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden bat-avatar-glow border-2 border-[#ff1a2d] bg-zinc-900 flex items-center justify-center relative">
                     <img id="avatarImage" 
                          src="1.png" 
                          alt="Muhammad Behroz" 
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                         class="w-full h-full object-cover"
                          onerror="this.src='https://placehold.co/400x400/2a0815/ff1a2d?text=Behroz'"
                     />
-                    <div class="absolute inset-0 bg-red-900/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <i class="fa-solid fa-camera text-white text-2xl glow-text-bat"></i>
-                    </div>
                 </div>
-                <input type="file" id="photoInput" class="hidden" accept="image/*">
             </div>
 
             <!-- Glowing Crimson Batman Title -->
@@ -425,7 +421,7 @@
 
         </div>
 
-        <!-- BATCAVE TACTICAL EQUIPMENT / STATS (NEW SECTION) -->
+        <!-- BATCAVE TACTICAL EQUIPMENT / STATS -->
         <div class="w-full gotham-card rounded-2xl p-6 sm:p-8">
             <div class="flex items-center space-x-3 mb-6 border-b border-red-500/30 pb-3">
                 <i class="fa-solid fa-dragon text-[#ff1a2d] text-2xl glow-text-bat"></i>
@@ -586,25 +582,7 @@
                 `${bdayDays} days, ${bdayHours}:${bdayMinutes}:${bdaySeconds}`;
         }
 
-        // --- 4. Interactive Profile Photo Upload ---
-        const avatarContainer = document.getElementById('avatarContainer');
-        const photoInput = document.getElementById('photoInput');
-        const avatarImage = document.getElementById('avatarImage');
-
-        avatarContainer.addEventListener('click', () => photoInput.click());
-
-        photoInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    avatarImage.src = event.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // --- 5. Smooth Cursor Follower & Dynamic Embers Trail ---
+        // --- 4. Smooth Cursor Follower & Dynamic Embers Trail ---
         const cursorGlow = document.getElementById('cursorGlow');
         const cursorSpotlight = document.getElementById('cursorSpotlight');
         
@@ -662,7 +640,7 @@
         }
         updateCursorPosition();
 
-        // --- 6. Advanced Batman Canvas Engine (Flying Bats & Bat-Signal Sparks) ---
+        // --- 5. Advanced Batman Canvas Engine (Flying Bats & Bat-Signal Sparks) ---
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
 
