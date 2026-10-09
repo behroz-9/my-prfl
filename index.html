@@ -522,7 +522,7 @@
                 <div class="mt-2">
                     <h3 class="text-[11px] font-mono uppercase tracking-widest text-red-400/80 mb-2 border-b border-red-950 pb-1 flex justify-between">
                         <span>Recent Transmissions</span>
-                        <span class="text-slate-400">Shows User Comment Count</span>
+                        <span class="text-slate-400">User Comment Count</span>
                     </h3>
                     <div id="commentsContainer" class="max-h-48 overflow-y-auto space-y-2 pr-1 text-xs">
                         <!-- Public Comments Display -->
@@ -530,7 +530,7 @@
                 </div>
             </div>
 
-            <!-- SIDE 2: PRIVATE SECURE INBOX (USER WITH ADMIN CHAT) -->
+            <!-- SIDE 2: PRIVATE SECURE INBOX (TWO-SIDE ALIGNED CHAT & FULL BACKEND STORAGE) -->
             <div class="gotham-card rounded-2xl p-6 flex flex-col justify-between border-red-500/60">
                 <div>
                     <div class="flex items-center space-x-3 mb-4 border-b border-red-500/30 pb-3">
@@ -542,34 +542,36 @@
 
                     <!-- Passcode Lock Interface -->
                     <div id="privateAuthBox" class="space-y-3 mb-4">
-                        <p class="text-xs text-slate-300">Enter your Username & 4-Digit Lock Passcode to open private chat with Admin:</p>
+                        <p class="text-xs text-slate-300">Enter your Unique Codename & 4-Digit Lock Passcode to open private chat:</p>
                         
-                        <input id="privateUsername" type="text" placeholder="Enter your unique username..." 
+                        <input id="privateUsername" type="text" placeholder="Enter your username / codename..." 
                                class="w-full bg-black/80 border border-red-500/40 rounded-lg px-3 py-2 text-xs sm:text-sm text-white placeholder-red-300/40 focus:outline-none focus:border-red-500 font-mono">
                         
                         <div class="flex space-x-2">
-                            <input id="privatePasscode" type="password" maxlength="4" placeholder="4-Digit Passcode" 
+                            <input id="privatePasscode" type="password" maxlength="4" placeholder="4-Digit Lock Key" 
                                    class="w-full bg-black/80 border border-red-500/40 rounded-lg px-3 py-2 text-xs sm:text-sm text-white placeholder-red-300/40 focus:outline-none focus:border-red-500 font-mono">
                             <button onclick="unlockPrivateInbox()" class="bg-red-700 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider transition-colors flex items-center gap-1 shadow-[0_0_10px_rgba(255,26,45,0.5)]">
-                                <i class="fa-solid fa-lock-open"></i> Open
+                                <i class="fa-solid fa-lock-open"></i> Unlock
                             </button>
                         </div>
-                        <p class="text-[10px] text-red-400/80 font-mono">* First-time user passcode will be saved automatically as key.</p>
+                        <p class="text-[10px] text-red-400/80 font-mono">* 1st time passcode will be locked to your account automatically.</p>
                     </div>
 
                     <!-- Private Active Chat Area (Hidden by Default) -->
                     <div id="privateChatArea" class="hidden flex-col h-full">
                         <div class="flex justify-between items-center bg-red-950/40 p-2 rounded border border-red-500/30 mb-2">
-                            <span class="text-xs font-bold text-red-300 font-mono" id="currentChatUserHeader"><i class="fa-solid fa-user-shield mr-1"></i> Inbox</span>
-                            <button onclick="lockPrivateInbox()" class="text-[10px] text-red-400 hover:text-white uppercase font-bold underline">Lock Inbox</button>
+                            <span class="text-xs font-bold text-red-300 font-mono" id="currentChatUserHeader"><i class="fa-solid fa-user-shield mr-1"></i> Private Room</span>
+                            <button onclick="lockPrivateInbox()" class="text-[10px] text-red-400 hover:text-white uppercase font-bold underline">Lock Room</button>
                         </div>
 
-                        <div id="privateMessagesContainer" class="h-32 overflow-y-auto space-y-2 pr-1 text-xs mb-3 bg-black/60 p-2 rounded border border-red-900/30">
-                            <!-- Private Messages Display -->
+                        <!-- Left & Right Chat Bubbles Container -->
+                        <div id="privateMessagesContainer" class="h-44 overflow-y-auto space-y-2 pr-1 text-xs mb-3 bg-black/60 p-2.5 rounded border border-red-900/30 flex flex-col">
+                            <!-- Private Messages Displayed Left/Right -->
                         </div>
 
                         <div class="flex space-x-2">
-                            <input id="privateMsgInput" type="text" placeholder="Private message to Admin..." 
+                            <input id="privateMsgInput" type="text" placeholder="Type a message..." 
+                                   onkeypress="if(event.key === 'Enter') sendPrivateMessage()"
                                    class="flex-1 bg-black/80 border border-red-500/40 rounded-lg px-3 py-2 text-xs text-white placeholder-red-300/40 focus:outline-none focus:border-red-500 font-mono">
                             <button onclick="sendPrivateMessage()" class="bg-red-600 hover:bg-red-500 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase transition-colors">
                                 Send
@@ -757,7 +759,7 @@
             }
         }
 
-        // --- 5. PUBLIC COMMENTS WITH USER COMMENT COUNTS ---
+        // --- 5. PUBLIC COMMENTS WITH PERSISTENT BACKEND COUNTS ---
         let commentsList = [
             { name: "Nightwing", text: "Awesome portfolio Behroz! Extreme skating skills 🔥" },
             { name: "Alfred", text: "Your stamina at 71 is truly remarkable, sir." }
@@ -820,11 +822,11 @@
             renderComments();
         }
 
-        // --- 6. SECURE PRIVATE INBOX WITH ADMIN ---
+        // --- 6. SECURE PRIVATE INBOX SYSTEM (LEFT/RIGHT CHAT + MULTI-USER DATA SAVE) ---
         let activePrivateUser = "";
         let privateKeys = {}; // Stores username: passcode
         let privateMessages = {}; // Stores username: [messages]
-        const ADMIN_MASTER_KEY = "9999"; // Admin Master Passcode to open any user chat
+        const ADMIN_MASTER_KEY = "9999"; // Master key for Admin to view any chat
 
         function loadPrivateStorage() {
             const savedKeys = localStorage.getItem('behroz_private_keys');
@@ -839,24 +841,24 @@
             const passcode = document.getElementById('privatePasscode').value.trim();
 
             if (!user || !passcode || passcode.length < 4) {
-                alert("Please enter a valid Username and 4-digit Passcode.");
+                alert("Please enter a valid Codename & 4-digit Lock Passcode.");
                 return;
             }
 
-            // Check if Admin Master Access
+            // Master Admin Key Check
             if (passcode === ADMIN_MASTER_KEY) {
                 activePrivateUser = user;
                 openChatView();
                 return;
             }
 
-            // Lock verification logic
+            // Verification & Auto Account Registration
             if (!privateKeys[user]) {
                 privateKeys[user] = passcode;
                 localStorage.setItem('behroz_private_keys', JSON.stringify(privateKeys));
-                alert(`Passcode saved! Private Inbox activated for ${user}.`);
+                alert(`Passcode set! Private room created for ${user}.`);
             } else if (privateKeys[user] !== passcode) {
-                alert("Incorrect Lock Passcode! Access Denied.");
+                alert("Incorrect Passcode! Access Denied.");
                 return;
             }
 
@@ -871,7 +873,7 @@
             chatArea.classList.add('flex');
 
             document.getElementById('currentChatUserHeader').innerHTML = 
-                `<i class="fa-solid fa-lock text-red-500 mr-1"></i> Private Chat: ${escapeHtml(activePrivateUser)} & Admin`;
+                `<i class="fa-solid fa-lock text-red-500 mr-1"></i> Private Room: ${escapeHtml(activePrivateUser)}`;
 
             renderPrivateMessages();
         }
@@ -892,6 +894,9 @@
 
             if (!text) return;
 
+            // Load fresh data before saving
+            loadPrivateStorage();
+
             if (!privateMessages[activePrivateUser]) {
                 privateMessages[activePrivateUser] = [];
             }
@@ -909,30 +914,50 @@
 
         function renderPrivateMessages() {
             const container = document.getElementById('privateMessagesContainer');
+            if (!container || !activePrivateUser) return;
+
             container.innerHTML = '';
+
+            // Fetch live data from backend storage
+            const savedMsgs = localStorage.getItem('behroz_private_msgs');
+            if (savedMsgs) privateMessages = JSON.parse(savedMsgs);
 
             const msgs = privateMessages[activePrivateUser] || [];
 
             if (msgs.length === 0) {
-                container.innerHTML = '<p class="text-slate-500 italic text-center py-4">No private transmissions yet. Send a message to Admin!</p>';
+                container.innerHTML = '<p class="text-slate-500 italic text-center my-auto">No private messages yet. Send a message!</p>';
                 return;
             }
 
             msgs.forEach(m => {
-                const msgEl = document.createElement('div');
-                msgEl.className = 'bg-red-950/40 border border-red-800/40 p-1.5 rounded text-slate-200';
-                msgEl.innerHTML = `
-                    <div class="flex justify-between text-[10px] text-red-400 font-mono mb-0.5">
-                        <span class="font-bold">${escapeHtml(m.sender)}</span>
-                        <span>${m.time}</span>
+                const isSelf = (m.sender === activePrivateUser);
+                const msgWrapper = document.createElement('div');
+                msgWrapper.className = `flex flex-col my-1 ${isSelf ? 'items-end' : 'items-start'}`;
+
+                msgWrapper.innerHTML = `
+                    <div class="text-[9px] font-mono mb-0.5 ${isSelf ? 'text-red-400' : 'text-slate-400'}">
+                        ${escapeHtml(m.sender)} • ${m.time}
                     </div>
-                    <p class="text-xs text-slate-300">${escapeHtml(m.text)}</p>
+                    <div class="px-3 py-1.5 rounded-xl max-w-[80%] text-xs ${
+                        isSelf 
+                        ? 'bg-gradient-to-r from-red-700 to-red-600 text-white rounded-br-none shadow-[0_0_10px_rgba(255,26,45,0.3)]' 
+                        : 'bg-zinc-800 border border-red-900/50 text-slate-200 rounded-bl-none'
+                    }">
+                        ${escapeHtml(m.text)}
+                    </div>
                 `;
-                container.appendChild(msgEl);
+                container.appendChild(msgWrapper);
             });
 
             container.scrollTop = container.scrollHeight;
         }
+
+        // Real-Time Inbox Syncing (Refreshes every 2 seconds for live chatting)
+        setInterval(() => {
+            if (activePrivateUser) {
+                renderPrivateMessages();
+            }
+        }, 2000);
 
         function escapeHtml(text) {
             return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
